@@ -8,11 +8,12 @@ A three-in-one desktop dashboard that consists of:
 * Notes
 * Expense Tracker
 ----
-### Characteristics
+### Project Characteristics
 * Light/Dark themes
 * Expand/Collapse mode for each feature
+* Uses LocalStorage
 ----
-### Weaknessess
+### Project Weaknessess
 * Probably a lot of undetected bugs
 * No reusability
 * Poorly documented code
