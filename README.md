@@ -1,6 +1,5 @@
 # Onidash
-----
-> ## Preview Link: www.google.com
+> Preview Link: www.google.com
 ----
 ### Project Features
 A three-in-one desktop dashboard that consists of:
