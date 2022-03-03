@@ -1,0 +1,1704 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: background-color 0.6s ease-in-out, color 1s ease-in-out;
+  scroll-behavior: smooth;
+}
+
+
+// PRELOADER
+.preloader {
+  background-color: black;
+  color: white;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+  &.hide {
+    opacity: 0%;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .pacman {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: white;
+    position: relative;
+    opacity: 100%;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .pacmanMouth {
+    position: absolute;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(100% 90%, 45% 50%, 100% 10%);
+    animation: eat 0.3s infinite;
+  }
+
+  @keyframes eat {
+    0% {
+      clip-path: polygon(100% 90%, 45% 50%, 100% 10%);
+    }
+    25% {
+      clip-path: polygon(100% 80%, 45% 50%, 100% 30%);
+    }
+    50% {
+      clip-path: polygon(100% 50%, 45% 50%, 100% 50%);
+    }
+    75% {
+      clip-path: polygon(100% 80%, 45% 50%, 100% 30%);
+    }
+    100% {
+      clip-path: polygon(100% 90%, 45% 50%, 100% 10%);
+    }
+  }
+
+  .dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    margin-left: 50px;
+  }
+}
+
+
+// All Vars
+$lbgColor: #A897F0;
+$lsbgColor: #D5D7ED;
+$lprimaryColor: #CAC1EA;
+$lsecondaryColor: #A897F0;
+$lborderColor: #2C2F4E;
+$lfontColor: #000000;
+
+$dbgColor: #000000;
+$dsbgColor: #074E58;
+$dprimaryColor: #277884;
+$dsecondaryColor: #091C1F;
+$dborderColor: #1EABC1;
+$dfontColor: #FFFFFF;
+
+$tickColor: #00FF61;
+
+
+$light: (
+    bgColor: $lbgColor,
+    sbgColor: $lsbgColor,
+    primaryColor: $lprimaryColor,
+    secondaryColor: $lsecondaryColor,
+    borderColor: $lborderColor,
+    fontColor: $lfontColor
+);
+
+$dark: (
+    bgColor: $dbgColor,
+    sbgColor: $dsbgColor,
+    primaryColor: $dprimaryColor,
+    secondaryColor: $dsecondaryColor,
+    borderColor: $dborderColor,
+    fontColor: $dfontColor
+);
+
+body.lightTheme {
+  @each $name, $color-name in $light{
+    --color-#{$name} : #{$color-name};
+  }
+--theme: 'light';
+}
+
+body.darkTheme {
+  @each $name, $color-name in $dark{
+      --color-#{$name} : #{$color-name};
+  }
+--theme : 'dark';
+}
+
+@function getColor($color-name){
+  @return var(--color-#{$color-name});
+}
+
+
+$slideTransition: all 0.6s ease;
+$slideTransitionFast : all 0.3s ease;
+
+
+// Main
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Times', serif;
+  overflow: hidden;
+}
+
+.main {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background-color: getColor(bgColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  // Edges
+  .edges {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    .edge {
+      width: 35px;
+      height: 35px;
+      border-color: getColor(borderColor);
+      border-style: solid;
+      position: absolute;
+      transition: $slideTransition;
+
+    &.edge1 {
+      border-width: 5px 0 0 5px;
+      top: 6.5px;
+      left: 7px;
+      }
+
+    &.edge2 {
+      border-width: 5px 5px 0 0;
+      top: 6.5px;
+      right: 7px;
+      }
+
+    &.edge3 {
+      border-width: 0 5px 5px 0;
+      bottom: 6.5px;
+      right: 7px;
+      }
+
+    &.edge4 {
+      border-width: 0 0 5px 5px;
+      bottom: 6.5px;
+      left: 7px;
+      }
+    }
+  }
+
+
+  // Notif
+  .notif {
+    position: absolute;
+    width: 400px;
+    height: 80px;
+    bottom: 0px;
+    background-color: getColor(borderColor);
+    color: white;
+    border-radius: 50px 50px 0 0;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(130%);
+    transition: $slideTransition;
+    z-index: 10;
+    box-shadow: 0 0 20px 0 getColor(borderColor);
+
+    &.show {
+      transform: translateY(0%);
+      transition: $slideTransition;
+    }
+  }
+
+
+  // Mainboard
+  .italic {
+    font-style: italic;
+  }
+
+  .mainBoard {
+    width: 85vw;
+    height: 87vh;
+    background-color: getColor(sbgColor);
+    border-radius: 75px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    transition: $slideTransition;
+  }
+
+  .introContentArea {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    transition: $slideTransition;
+    display: flex;
+    opacity: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 75px;
+    font-size: 150px;
+    color: getColor(fontColor);
+
+
+    .introIntro {
+      transition: $slideTransition;
+      font-size: 150px;
+      display: none;
+      opacity: 0%;
+    }
+
+    .introName {
+      transition: $slideTransition;
+      font-size: 70px;
+      display: none;
+      opacity: 0%;
+      justify-content: center;
+      align-content: center;
+      flex-direction: column;
+
+      .nameIntroInputStorage {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        .nameAccCircle {
+          position: relative;
+          width: 60px;
+          height: 60px;
+          background-color: black;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          .nameAccTick {
+            fill: white;
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        .nameIntroInput {
+          width: 50vw;
+          height: 80px;
+          border-radius: 80px;
+          margin: 10px;
+          background-color: getColor(borderColor);
+          padding: 30px;
+          cursor: text;
+          border: 0;
+          font-size: 30px;
+          color: white;
+          font-weight: bold;
+  
+          &::placeholder {
+            color: rgb(192, 192, 192);
+          }
+  
+          &:focus {
+            outline: none;
+          }
+        }
+       }
+      }
+
+
+    .introHey {
+      transition: $slideTransition;
+      font-size: 150px;
+      display: none;
+      opacity: 0%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 150%;
+      height: 100%;
+
+      .introHeyNameCon {
+        display: flex;
+      }
+
+      span {
+        font-size: 70px;
+      }
+    }
+  }
+
+    .welcomeBack {
+      display: none;
+      opacity: 0%;
+      flex-direction: column;
+      transition: $slideTransition;
+      font-size: 100px;
+    }
+}
+
+
+// Defaults
+.backCircleThing {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+
+  .backArrow {
+    fill: white;
+    width: 30px;
+    height: 30px;
+    transform: rotate(180deg);
+  }
+}
+
+.plus {
+  position: absolute;
+  bottom: 70px;
+  right: 35px;
+  width: 35px;
+  height: 35px;
+  fill: getColor(fontColor);
+  cursor: pointer;
+
+  &.db {
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    bottom: 60px;
+    z-index: 1;
+  }
+
+  &.wallet {
+    right: 20px;
+    bottom: 60px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.exitFs {
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  width: 35px;
+  height: 35px;
+  fill: getColor(fontColor);
+  cursor: pointer;
+}
+
+.fs {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  fill: getColor(fontColor);
+  cursor: pointer;
+  z-index: 1;
+
+  &.wallet {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.hoverThingy {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  transition: $slideTransitionFast;
+  font-size: 20px;
+  padding: 3px;
+  width: 180px;
+  height: 25px;
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+
+  &.show {
+    display: none;
+    transition: $slideTransitionFast;
+    z-index: 99;
+  }
+}
+
+.contextMenuNote {
+  position: absolute;
+  width: 180px;
+  height: 25px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+  display: none;
+  border-radius: 5px;
+
+  &:hover {
+    &:after {
+      content: '';
+      position: absolute;
+      background-color: black;
+      opacity: 50%;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+  }
+}
+
+.save {
+  position: absolute;
+  fill: getColor(fontColor);
+  cursor: pointer;
+  z-index: 1;
+  bottom: 120px;
+  right: 34px;
+  width: 35px;
+  height: 35px;
+
+  &.db {
+    bottom: 105px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+
+
+// Both Dashboard and Singular Screen Edits
+.todoContent {
+  flex-direction: column;
+  width: 950px;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &.db {
+    width: 370px;
+    height: 350px;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  &::-webkit-scrollbar {
+    position: absolute;
+    background-color: getColor(borderColor);
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollBar-thumb {
+    background-color: white;
+    border-radius: 15px;
+  }
+
+  .taskCon {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 3%;
+    background-color: getColor(primaryColor);
+    border-radius: 24px;
+    position: relative;
+    font-weight: bold;
+
+    &.db {
+      height: 40px;
+      margin-bottom: 15px;
+    }
+
+    .taskCheckCon {
+      position: absolute;
+      width: 50px;
+      height: 100%;
+      background-color: getColor(secondaryColor);
+      border-radius: 24px 0 0 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1;
+
+      &.db {
+        width: 30px;
+        height: 100%;
+      }
+
+      .taskCheckSvg {
+        width: 48px;
+        height: 40px;
+        fill: $tickColor;
+
+        &.db {
+          width: 24px;
+          height: 20px;
+        }
+      }
+    }
+
+    .taskTitleCon {
+      color: getColor(fontColor);
+      font-size: 25px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+
+      p {
+        position: relative;
+        right: 0px;
+        padding-left: 60px;
+        width: 850px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.db {
+          padding-left: 35px;
+          font-size: 20px;
+          width: 300px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .taskDateCon {
+      position: absolute;
+      width: 50px;
+      height: 100%;
+      background-color: getColor(secondaryColor);
+      border-radius: 0 24px 24px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      right: 0;
+      top: 0;
+      margin-left: 5px;
+      flex-direction: column;
+      color: getColor(fontColor);
+
+      &.db {
+        padding: 20px;
+      }
+
+      p {
+        position: relative;
+        right: 5px;
+
+        &.db {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+
+.noteListCon {
+  list-style-type: none;
+  border: 8px solid getColor(borderColor);
+  border-right: 0px;
+  width: 20%;
+  height: 100%;
+  border-radius: 75px 0 0 75px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 40px;
+  font-weight: bold;
+  color: getColor(fontColor);
+
+  &.db {
+    border-radius: 34px 0 0 34px;
+    background-color: getColor(primaryColor);
+    font-size: 30px;
+    width: 30%;
+    margin: 0;
+  }
+
+  &::-webkit-scrollbar {
+    position: absolute;
+    background-color: getColor(borderColor);
+  }
+
+  &::-webkit-scrollBar-thumb {
+    background-color: white;
+    border-radius: 15px;
+  }
+
+  .noteList {
+    display: block;
+    border-bottom: 1px solid getColor(borderColor);
+    height: 100px;
+    width: 250px;
+    cursor: pointer;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 30px;
+    padding: 20px;
+    padding-right: 40px;
+    text-align: start;
+
+    &.db {
+      width: 150px;
+      padding: 15px 20px 15px 15px;
+    }
+
+    &.focused {
+      background-color: getColor(secondaryColor);
+      border-radius: 65px 0 0 0;
+
+      &.db {
+        border-radius: 25px 0 0 0;
+      }
+    }
+  }
+}
+
+.noteMainCon {
+  width: 80%;
+  padding-left: 30px;
+  padding-right: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
+  border-radius: 0 75px 75px 0;
+  overflow-y: scroll;
+
+  &.db {
+    // padding: 10px;
+    width: 100%;
+    border-radius: 0 34px 34px 0;
+    overflow-y: hidden;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .noteMainHeader {
+    font-size: 80px;
+    font-weight: bold;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 3px solid getColor(borderColor);
+    margin-bottom: 10px;
+    background-color: getColor(sbgColor);
+    color: getColor(fontColor);
+    height: 100px;
+    width: 800px;
+    overflow-x: scroll;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+
+    &.db {
+      height: 80px;
+      width: 571px;
+      position: fixed;
+      right: 67.7px;
+      top: 48px;
+      padding-left: 20px;
+      padding-top: 15px;
+      font-size: 60px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      border-radius: 0 34px 0 0;
+      border-bottom: 3px solid getColor(borderColor);
+      font-size: 50px;
+    }
+    
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+  }
+
+  .noteMainBody {
+    font-size: 20px;
+    line-height: 26px;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background-color: getColor(sbgColor);
+    color: getColor(fontColor);
+    resize: none;
+    overflow-y: scroll;
+    font-weight: bold;
+
+    &.db {
+      width: 600px;
+      position: relative;
+      right: 30px;
+      padding: 10px;
+      padding-right: 100px;
+      top: 70px;
+      height: 80%;
+      overflow-y: scroll;
+    }
+    
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.walletCon {
+  display: grid;
+  position: relative;
+  width: 100%;
+  height: 90%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  overflow-y: scroll;
+  row-gap: 30px;
+  column-gap: 10px;
+  padding-right: 30px;
+
+  .singleWalletCon {
+    height: 130px;
+    width: 130px;
+    border-radius: 35px 35px 0px 0px;
+    background-color: getColor(primaryColor);
+    border: 8px solid getColor(borderColor);
+    z-index: 5;
+
+    &.db {
+      margin-right: 10px;
+    }
+
+    &.total {
+
+    }
+
+    .singleWalletName {
+      width: 100%;
+      border-radius: 29px 29px 0px 0px;
+      background-color: getColor(secondaryColor);
+      border-bottom: 1px solid getColor(borderColor);
+      font-size: 26px;
+      text-align: center;
+      padding: 8%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    
+    .singleWalletAmount {
+      font-size: 30px;
+      font-weight: bold;
+      height: 60%;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      top: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 10px;
+    }
+  }
+  
+  &::-webkit-scrollbar {
+    position: absolute;
+    background-color: getColor(borderColor);
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollBar-thumb {
+    background-color: white;
+    border-radius: 15px;
+  }
+}
+
+
+// Dashboard
+.dashboard {
+  display: none;
+  justify-content: space-between;
+  color: getColor(fontColor);
+  width: 90%;
+  height: 85%;
+  border-radius: 34px;
+  opacity: 0%;
+  transition: $slideTransitionFast;
+  position: absolute;
+
+
+  .leftDashboard {
+    display: flex;
+    flex-direction: column;
+    border-radius: 34px;
+    width: 37%;
+
+    .settingDashboard {
+      height: 20%;
+      display: flex;
+      position: relative;
+      background-color: getColor(sbgColor);
+      border-radius: 34px;
+      font-weight: bold;
+
+      .settingDashboardGear {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        fill: getColor(fontColor);
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .settingDashboardDate {
+        display: flex;
+        width: 40%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+
+        p {
+          font-size: 16px;
+
+          &.SDDDateAndMonth {
+            font-size: 40px;
+          }
+        }
+      }
+
+      .settingDashboardTimeAndName {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        border-left: 8px solid getColor(borderColor);
+
+        .SDTNTime {
+          font-size: 70px;
+          position: relative;
+          right: 8px;
+          bottom: 2px;
+
+        }
+        
+        .SDTNName {
+          position: relative;
+          right: 8px;
+          bottom: 2px;
+          padding: 0px 40px;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .todoDashboard {
+      height: 75%;
+      margin-top: 30px;
+      display: flex;
+      position: relative;
+      background-color: getColor(sbgColor);
+      border-radius: 34px;
+      font-weight: bold;
+      width: 100%;
+    }
+  }
+
+
+  .rightDashboard {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    border-radius: 34px;
+    width: 60%;
+
+    .noteDashboard {
+      display: flex;
+      background-size: getColor(sbgColor);
+      height: 60%;
+      border-radius: 34px;
+      margin-bottom: 30px;
+      font-size: 30px;
+      position: relative;
+      padding: 0;
+      width: 100%;
+    }
+
+    .walletDashboard {
+      width: 100%;
+      height: 34.5%;
+      background-color: getColor(sbgColor);
+      border-radius: 34px;
+      color: getColor(fontColor);
+      display: flex;
+      align-items: center;
+      position: relative;
+            
+      .walletConDashboard {
+        display: grid;
+        grid-template-columns: repeat(999999999, 1fr);
+        position: relative;
+        left: 30px;
+        height: 150px;
+        width: 600px;
+        border-radius: 0px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        margin: 0;
+        padding-bottom: 10px;
+      
+        .singleWalletCon {
+          height: 150px;
+          width: 150px;
+          border-radius: 35px 35px 0px 0px;
+          background-color: getColor(primaryColor);
+          border: 8px solid getColor(borderColor);
+          margin-right: 10px;
+
+          .singleWalletName {
+            width: 100%;
+            border-radius: 29px 29px 0px 0px;
+            background-color: getColor(secondaryColor);
+            border-bottom: 1px solid getColor(borderColor);
+            font-size: 26px;
+            text-align: center;
+            padding: 8%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          
+          .singleWalletAmount {
+            font-size: 30px;
+            font-weight: bold;
+            height: 60%;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            top: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 10px;
+          }
+        }
+        
+        &::-webkit-scrollbar {
+          position: absolute;
+          background-color: getColor(borderColor);
+          border-radius: 15px;
+        }
+
+        &::-webkit-scrollBar-thumb {
+          background-color: white;
+          border-radius: 15px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+// <!-- Settings -->
+.settingsBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: getColor(sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: $slideTransitionFast;
+  position: absolute;
+
+  .settingsContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+    width: 50%;
+    height: 60%;
+
+    .settingCon {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .settingLabel {
+        color: getColor(fontColor);
+        font-size: 50px;
+        font-weight: bold;
+      }
+
+      // Theme
+      .switchThemeCon {
+        position: relative;
+
+        .moon {
+          width: 30px;
+          height: 30px;
+          fill: #FFEB00;
+          position: absolute;
+          left: 22px;
+          bottom: 20px;
+          cursor: pointer;
+        }
+
+        .cloud {
+          width: 52px;
+          height: 40px;
+          position: absolute;
+          right: 10px;
+          bottom: 15px;
+          cursor: pointer;
+        }
+      }
+
+        .themeCheck {
+          width: 130px;
+          height: 60px;
+          font-size: 30px;
+          border-radius: 30px;
+          border: 0;
+          padding: 0px 20px;
+          background-color: getColor(secondaryColor);
+          color: getColor(fontColor);
+          font-weight: bold;
+          cursor: pointer;
+          appearance: none;
+
+          &:before {
+            display: block;
+            content: '';
+            width: 60px;
+            height: 45px;
+            border-radius: 24px;
+            background-color: black;
+            position: absolute;
+            bottom: 12px;
+            left: 63px;
+            transition: $slideTransition;
+          }
+
+          &:checked {
+
+            &:before {
+              display: block;
+              content: '';
+              width: 60px;
+              height: 45px;
+              border-radius: 24px;
+              background-color: white;
+              position: absolute;
+              bottom: 12px;
+              left: 7.5px;
+              transition: $slideTransition;      
+            }
+          }
+        }
+
+      // Name
+      .nameSettingInputStorage {
+        position: relative;
+
+        .nameSettingInput {
+          width: 260px;
+          height: 60px;
+          font-size: 30px;
+          border-radius: 30px;
+          border: 0;
+          padding: 20px;
+          background-color: getColor(secondaryColor);
+          color: getColor(fontColor);
+          font-weight: bold;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .setAccCircle {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          background-color: black;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          right: -60px;
+          top: 5px;
+  
+          .nameAccTick {
+            fill: white;
+            width: 30px;
+            height: 30px;
+          }
+        }
+  
+      }
+
+      // Currency
+      .currencySetting {
+        width: 260px;
+        height: 60px;
+        font-size: 30px;
+        border-radius: 30px;
+        border: 0;
+        padding: 0px 20px;
+        background-color: getColor(secondaryColor);
+        color: getColor(fontColor);
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1;
+
+        &:focus {
+          outline: none;
+        }
+
+        .currencyOption {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+
+
+// <!-- To-do List -->
+.todoBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: getColor(sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 100%;
+  transition: $slideTransitionFast;
+  position: absolute;
+}
+
+
+
+// <!-- Note App -->
+.noteBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: getColor(sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 100%;
+  transition: $slideTransitionFast;
+  position: absolute;
+  color: getColor(fontColor);
+}
+
+
+
+
+// <!-- Expense Tracker -->
+.expenseBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: getColor(sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 100%;
+  transition: $slideTransitionFast;
+  position: absolute;
+  color: getColor(fontColor);
+
+  .expenseBoardInner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .walletLogBigCon {
+      display: flex;
+      flex-direction: column;
+      height: 90%;
+      width: 45%;
+      margin-right: 5%;
+      padding-left: 50px;
+      justify-content: flex-start;
+    }
+  
+    .expenseTitles {
+      height: 10%;
+      font-size: 50px;
+      margin-bottom: 20px;
+  
+      &.wallet {
+        width: 50%;
+        text-align: start;
+      }
+    }
+  
+    .transLogBigCon {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      height: 90%;
+      margin-right: 10%;
+      justify-content: flex-start;
+  
+      .transLogMainCon {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        overflow-y: scroll;
+        height: 450px;
+        padding-right: 30px;
+  
+        &::-webkit-scrollbar {
+          position: absolute;
+          background-color: getColor(borderColor);
+          border-radius: 15px;
+        }
+      
+        &::-webkit-scrollBar-thumb {
+          background-color: white;
+          border-radius: 15px;
+        }
+  
+        .singleLogCon {
+          width: 100%;
+          height: 50px;
+          background-color: getColor(primaryColor);
+          border-radius: 25px;
+          margin-bottom: 20px;
+          color: getColor(fontColor);
+          font-weight: bold;
+          font-size: 25px;
+          display: grid;
+          grid-template-columns: 1fr 6fr 3fr 2fr;
+  
+          .deleteLogCon {
+            border-radius: 25px 0 0 25px;
+            font-size: 16px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: getColor(secondaryColor);
+            color: white;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            z-index: 0;
+          }
+  
+          .singleLogTitle {
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          
+          .singleLogWalletTitle {
+            background-color: getColor(secondaryColor);
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            width: 80px;
+            height: 100%;
+            padding-left: 5px;
+            padding-right: 10px;
+            margin-right: 10px;
+            overflow-x: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+  
+          .singleLogIOE {
+            border-radius: 0 25px 25px 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+  
+            &.expense {
+              background-color: #930C0C;
+            }
+            
+            &.income {
+              background-color: #009D3C;
+            }
+          }
+  
+          .singleLogDate {
+            background-color: getColor(secondaryColor);
+            height: 100%;
+            font-size: 16px;
+            border-radius: 0px 25px 25px 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+  
+            p {
+              position: relative;
+              right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+// Add Containers
+// Todo
+.todoAddBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: getColor(sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: $slideTransitionFast;
+  position: relative;
+  position: absolute;
+
+  
+  label {
+    color: getColor(fontColor);
+    font-size: 25px;
+    text-decoration: underline;
+  }
+
+  .todoAddContent {
+    width: 60%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .taskTitleAddCon {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .taskTitleAddInput {
+      height: 75px;
+      border-radius: 38px;
+      background-color: getColor(primaryColor);
+      font-size: 40px;
+      font-weight: bold;
+      border: 0;
+      cursor: text;
+      color: getColor(fontColor);
+      padding: 20px;
+      margin-top: 10px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .taskDateInnerCon {
+      
+      .taskDateAddInput {
+        background-color: getColor(primaryColor);
+        height: 75px;
+        font-size: 40px;
+        border: 0;
+        color: getColor(fontColor);
+        fill: getColor(fontColor);
+        border-radius: 38px;
+        padding: 20px;
+        margin-top: 10px;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .taskAddConfirmBtn {
+      height: 75px;
+      width: 75%;
+      display: flex;
+      justify-self: center;
+      align-self: center;
+      align-content: center;
+      justify-content: center;
+      border-radius: 38px;
+      background-color: getColor(borderColor);
+      font-size: 40px;
+      font-weight: bold;
+      border: 0;
+      cursor: pointer;
+      color: getColor(fontColor);
+      padding: 15px;
+      margin-top: 10px;
+    }
+  }
+}
+
+
+// Expense
+.expenseAddBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: getColor(sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+  transition: $slideTransitionFast;
+  position: absolute;
+  color: getColor(fontColor);
+
+  .expenseAddTransactionCon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    height: 90%;
+    border-right: 8px solid getColor(borderColor);
+    position: relative;
+
+    .EATCTitle {
+      font-weight: bold;
+      font-size: 40px;
+    }
+
+    .singleInputEATCCon {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      label {
+        text-decoration: underline;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .EATC {
+        border-radius: 38px;
+        border: 0;
+        background-color: getColor(primaryColor);
+        width: 350px;
+        height: 55px;
+        padding: 10px;
+        font-size: 30px;
+        padding: 20px;
+        color: getColor(fontColor);
+
+        &.num {
+            
+          &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+            appearance: none;
+          }
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &.trans {
+          width: 100%;
+        }
+      }
+
+      .EATCSelect {
+        border-radius: 38px;
+        border: 0;
+        background-color: getColor(primaryColor);
+        width: 350px;
+        height: 55px;
+        padding: 10px;
+        font-size: 20px;
+        color: getColor(fontColor);
+        font-weight: bold;
+
+        &.wallet {
+          width: 220px;
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        option {
+          border: 0;
+        }
+      }
+    }
+
+    .bigSingleInputEATCCon {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 75%;
+
+      .singleInputEATCCon {
+
+        .EATC {
+          width: 220px;
+        }
+      }
+    }
+  }
+
+
+  .expenseAddWalletCon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 90%;
+    border-left: 8px solid getColor(borderColor);
+
+    .EAWCTitle {
+      position: relative;
+      bottom: 27px;
+      font-weight: bold;
+      font-size: 40px;
+    }
+
+    .bigSingleInputEAWCCon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: space-between;
+
+      .singleInputEAWCCon {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+  
+        label {
+          font-size: 20px;
+          text-decoration: underline;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        .EAWC {
+          border-radius: 38px;
+          border: 0;
+          background-color: getColor(primaryColor);
+          width: 250px;
+          height: 55px;
+          padding: 10px;
+          font-size: 30px;
+          margin-bottom: 50px;
+          padding: 20px;
+          color: getColor(fontColor);
+          
+          &.num {
+            
+            &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+              appearance: none;
+            }
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+
+  .EAButton {
+    width: 65%;
+    background-color: getColor(borderColor);
+    height: 60px;
+    border-radius: 38px;
+    border: 0;
+    font-size: 40px;
+    color: getColor(fontColor);
+    font-family: 'Times', serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-weight: bold;
+
+    &.EAWButton {
+      position: relative;
+      top: 8px;
+      width: 75%;
+    }
+  }
+}
+
+

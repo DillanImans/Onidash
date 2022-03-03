@@ -1,0 +1,1585 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: background-color 0.6s ease-in-out, color 1s ease-in-out;
+  scroll-behavior: smooth;
+}
+
+.preloader {
+  background-color: black;
+  color: white;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.preloader.hide {
+  opacity: 0%;
+  transition: all 0.3s ease-in-out;
+}
+
+.preloader .pacman {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+  opacity: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.preloader .pacmanMouth {
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 90%, 45% 50%, 100% 10%);
+  animation: eat 0.3s infinite;
+}
+
+@keyframes eat {
+  0% {
+    clip-path: polygon(100% 90%, 45% 50%, 100% 10%);
+  }
+  25% {
+    clip-path: polygon(100% 80%, 45% 50%, 100% 30%);
+  }
+  50% {
+    clip-path: polygon(100% 50%, 45% 50%, 100% 50%);
+  }
+  75% {
+    clip-path: polygon(100% 80%, 45% 50%, 100% 30%);
+  }
+  100% {
+    clip-path: polygon(100% 90%, 45% 50%, 100% 10%);
+  }
+}
+
+.preloader .dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  margin-left: 50px;
+}
+
+body.lightTheme {
+  --color-bgColor: #A897F0;
+  --color-sbgColor: #D5D7ED;
+  --color-primaryColor: #CAC1EA;
+  --color-secondaryColor: #A897F0;
+  --color-borderColor: #2C2F4E;
+  --color-fontColor: #000000;
+  --theme: 'light';
+}
+
+body.darkTheme {
+  --color-bgColor: #000000;
+  --color-sbgColor: #074E58;
+  --color-primaryColor: #277884;
+  --color-secondaryColor: #091C1F;
+  --color-borderColor: #1EABC1;
+  --color-fontColor: #FFFFFF;
+  --theme: 'dark';
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Times', serif;
+  overflow: hidden;
+}
+
+.main {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background-color: var(--color-bgColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main .edges {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main .edges .edge {
+  width: 35px;
+  height: 35px;
+  border-color: var(--color-borderColor);
+  border-style: solid;
+  position: absolute;
+  transition: all 0.6s ease;
+}
+
+.main .edges .edge.edge1 {
+  border-width: 5px 0 0 5px;
+  top: 6.5px;
+  left: 7px;
+}
+
+.main .edges .edge.edge2 {
+  border-width: 5px 5px 0 0;
+  top: 6.5px;
+  right: 7px;
+}
+
+.main .edges .edge.edge3 {
+  border-width: 0 5px 5px 0;
+  bottom: 6.5px;
+  right: 7px;
+}
+
+.main .edges .edge.edge4 {
+  border-width: 0 0 5px 5px;
+  bottom: 6.5px;
+  left: 7px;
+}
+
+.main .notif {
+  position: absolute;
+  width: 400px;
+  height: 80px;
+  bottom: 0px;
+  background-color: var(--color-borderColor);
+  color: white;
+  border-radius: 50px 50px 0 0;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(130%);
+  transition: all 0.6s ease;
+  z-index: 10;
+  box-shadow: 0 0 20px 0 var(--color-borderColor);
+}
+
+.main .notif.show {
+  transform: translateY(0%);
+  transition: all 0.6s ease;
+}
+
+.main .italic {
+  font-style: italic;
+}
+
+.main .mainBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s ease;
+}
+
+.main .introContentArea {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  transition: all 0.6s ease;
+  display: flex;
+  opacity: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 75px;
+  font-size: 150px;
+  color: var(--color-fontColor);
+}
+
+.main .introContentArea .introIntro {
+  transition: all 0.6s ease;
+  font-size: 150px;
+  display: none;
+  opacity: 0%;
+}
+
+.main .introContentArea .introName {
+  transition: all 0.6s ease;
+  font-size: 70px;
+  display: none;
+  opacity: 0%;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.main .introContentArea .introName .nameIntroInputStorage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.main .introContentArea .introName .nameIntroInputStorage .nameAccCircle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.main .introContentArea .introName .nameIntroInputStorage .nameAccCircle .nameAccTick {
+  fill: white;
+  width: 40px;
+  height: 40px;
+}
+
+.main .introContentArea .introName .nameIntroInputStorage .nameIntroInput {
+  width: 50vw;
+  height: 80px;
+  border-radius: 80px;
+  margin: 10px;
+  background-color: var(--color-borderColor);
+  padding: 30px;
+  cursor: text;
+  border: 0;
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+.main .introContentArea .introName .nameIntroInputStorage .nameIntroInput::placeholder {
+  color: silver;
+}
+
+.main .introContentArea .introName .nameIntroInputStorage .nameIntroInput:focus {
+  outline: none;
+}
+
+.main .introContentArea .introHey {
+  transition: all 0.6s ease;
+  font-size: 150px;
+  display: none;
+  opacity: 0%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150%;
+  height: 100%;
+}
+
+.main .introContentArea .introHey .introHeyNameCon {
+  display: flex;
+}
+
+.main .introContentArea .introHey span {
+  font-size: 70px;
+}
+
+.main .welcomeBack {
+  display: none;
+  opacity: 0%;
+  flex-direction: column;
+  transition: all 0.6s ease;
+  font-size: 100px;
+}
+
+.backCircleThing {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.backCircleThing .backArrow {
+  fill: white;
+  width: 30px;
+  height: 30px;
+  transform: rotate(180deg);
+}
+
+.plus {
+  position: absolute;
+  bottom: 70px;
+  right: 35px;
+  width: 35px;
+  height: 35px;
+  fill: var(--color-fontColor);
+  cursor: pointer;
+}
+
+.plus.db {
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  bottom: 60px;
+  z-index: 1;
+}
+
+.plus.wallet {
+  right: 20px;
+  bottom: 60px;
+  width: 30px;
+  height: 30px;
+}
+
+.exitFs {
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  width: 35px;
+  height: 35px;
+  fill: var(--color-fontColor);
+  cursor: pointer;
+}
+
+.fs {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  fill: var(--color-fontColor);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.fs.wallet {
+  width: 30px;
+  height: 30px;
+}
+
+.hoverThingy {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  padding: 3px;
+  width: 180px;
+  height: 25px;
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+}
+
+.hoverThingy.show {
+  display: none;
+  transition: all 0.3s ease;
+  z-index: 99;
+}
+
+.contextMenuNote {
+  position: absolute;
+  width: 180px;
+  height: 25px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+  display: none;
+  border-radius: 5px;
+}
+
+.contextMenuNote:hover:after {
+  content: '';
+  position: absolute;
+  background-color: black;
+  opacity: 50%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.save {
+  position: absolute;
+  fill: var(--color-fontColor);
+  cursor: pointer;
+  z-index: 1;
+  bottom: 120px;
+  right: 34px;
+  width: 35px;
+  height: 35px;
+}
+
+.save.db {
+  bottom: 105px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.todoContent {
+  flex-direction: column;
+  width: 950px;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.todoContent.db {
+  width: 370px;
+  height: 350px;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.todoContent::-webkit-scrollbar {
+  position: absolute;
+  background-color: var(--color-borderColor);
+  border-radius: 15px;
+}
+
+.todoContent::-webkit-scrollBar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.todoContent .taskCon {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 3%;
+  background-color: var(--color-primaryColor);
+  border-radius: 24px;
+  position: relative;
+  font-weight: bold;
+}
+
+.todoContent .taskCon.db {
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+.todoContent .taskCon .taskCheckCon {
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  background-color: var(--color-secondaryColor);
+  border-radius: 24px 0 0 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.todoContent .taskCon .taskCheckCon.db {
+  width: 30px;
+  height: 100%;
+}
+
+.todoContent .taskCon .taskCheckCon .taskCheckSvg {
+  width: 48px;
+  height: 40px;
+  fill: #00FF61;
+}
+
+.todoContent .taskCon .taskCheckCon .taskCheckSvg.db {
+  width: 24px;
+  height: 20px;
+}
+
+.todoContent .taskCon .taskTitleCon {
+  color: var(--color-fontColor);
+  font-size: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.todoContent .taskCon .taskTitleCon p {
+  position: relative;
+  right: 0px;
+  padding-left: 60px;
+  width: 850px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todoContent .taskCon .taskTitleCon p.db {
+  padding-left: 35px;
+  font-size: 20px;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todoContent .taskCon .taskDateCon {
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  background-color: var(--color-secondaryColor);
+  border-radius: 0 24px 24px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  margin-left: 5px;
+  flex-direction: column;
+  color: var(--color-fontColor);
+}
+
+.todoContent .taskCon .taskDateCon.db {
+  padding: 20px;
+}
+
+.todoContent .taskCon .taskDateCon p {
+  position: relative;
+  right: 5px;
+}
+
+.todoContent .taskCon .taskDateCon p.db {
+  font-size: 14px;
+}
+
+.noteListCon {
+  list-style-type: none;
+  border: 8px solid var(--color-borderColor);
+  border-right: 0px;
+  width: 20%;
+  height: 100%;
+  border-radius: 75px 0 0 75px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--color-fontColor);
+}
+
+.noteListCon.db {
+  border-radius: 34px 0 0 34px;
+  background-color: var(--color-primaryColor);
+  font-size: 30px;
+  width: 30%;
+  margin: 0;
+}
+
+.noteListCon::-webkit-scrollbar {
+  position: absolute;
+  background-color: var(--color-borderColor);
+}
+
+.noteListCon::-webkit-scrollBar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.noteListCon .noteList {
+  display: block;
+  border-bottom: 1px solid var(--color-borderColor);
+  height: 100px;
+  width: 250px;
+  cursor: pointer;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 30px;
+  padding: 20px;
+  padding-right: 40px;
+  text-align: start;
+}
+
+.noteListCon .noteList.db {
+  width: 150px;
+  padding: 15px 20px 15px 15px;
+}
+
+.noteListCon .noteList.focused {
+  background-color: var(--color-secondaryColor);
+  border-radius: 65px 0 0 0;
+}
+
+.noteListCon .noteList.focused.db {
+  border-radius: 25px 0 0 0;
+}
+
+.noteMainCon {
+  width: 80%;
+  padding-left: 30px;
+  padding-right: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
+  border-radius: 0 75px 75px 0;
+  overflow-y: scroll;
+}
+
+.noteMainCon.db {
+  width: 100%;
+  border-radius: 0 34px 34px 0;
+  overflow-y: hidden;
+}
+
+.noteMainCon::-webkit-scrollbar {
+  display: none;
+}
+
+.noteMainCon .noteMainHeader {
+  font-size: 80px;
+  font-weight: bold;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 3px solid var(--color-borderColor);
+  margin-bottom: 10px;
+  background-color: var(--color-sbgColor);
+  color: var(--color-fontColor);
+  height: 100px;
+  width: 800px;
+  overflow-x: scroll;
+}
+
+.noteMainCon .noteMainHeader.db {
+  height: 80px;
+  width: 571px;
+  position: fixed;
+  right: 67.7px;
+  top: 48px;
+  padding-left: 20px;
+  padding-top: 15px;
+  font-size: 60px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-radius: 0 34px 0 0;
+  border-bottom: 3px solid var(--color-borderColor);
+  font-size: 50px;
+}
+
+.noteMainCon .noteMainHeader:focus {
+  outline: none;
+}
+
+.noteMainCon .noteMainHeader::-webkit-scrollbar {
+  display: none;
+}
+
+.noteMainCon .noteMainBody {
+  font-size: 20px;
+  line-height: 26px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background-color: var(--color-sbgColor);
+  color: var(--color-fontColor);
+  resize: none;
+  overflow-y: scroll;
+  font-weight: bold;
+}
+
+.noteMainCon .noteMainBody.db {
+  width: 600px;
+  position: relative;
+  right: 30px;
+  padding: 10px;
+  padding-right: 100px;
+  top: 70px;
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.noteMainCon .noteMainBody:focus {
+  outline: none;
+}
+
+.noteMainCon .noteMainBody::-webkit-scrollbar {
+  display: none;
+}
+
+.walletCon {
+  display: grid;
+  position: relative;
+  width: 100%;
+  height: 90%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  overflow-y: scroll;
+  row-gap: 30px;
+  column-gap: 10px;
+  padding-right: 30px;
+}
+
+.walletCon .singleWalletCon {
+  height: 130px;
+  width: 130px;
+  border-radius: 35px 35px 0px 0px;
+  background-color: var(--color-primaryColor);
+  border: 8px solid var(--color-borderColor);
+  z-index: 5;
+}
+
+.walletCon .singleWalletCon.db {
+  margin-right: 10px;
+}
+
+.walletCon .singleWalletCon .singleWalletName {
+  width: 100%;
+  border-radius: 29px 29px 0px 0px;
+  background-color: var(--color-secondaryColor);
+  border-bottom: 1px solid var(--color-borderColor);
+  font-size: 26px;
+  text-align: center;
+  padding: 8%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.walletCon .singleWalletCon .singleWalletAmount {
+  font-size: 30px;
+  font-weight: bold;
+  height: 60%;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.walletCon::-webkit-scrollbar {
+  position: absolute;
+  background-color: var(--color-borderColor);
+  border-radius: 15px;
+}
+
+.walletCon::-webkit-scrollBar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.dashboard {
+  display: none;
+  justify-content: space-between;
+  color: var(--color-fontColor);
+  width: 90%;
+  height: 85%;
+  border-radius: 34px;
+  opacity: 0%;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.dashboard .leftDashboard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 34px;
+  width: 37%;
+}
+
+.dashboard .leftDashboard .settingDashboard {
+  height: 20%;
+  display: flex;
+  position: relative;
+  background-color: var(--color-sbgColor);
+  border-radius: 34px;
+  font-weight: bold;
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardGear {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  fill: var(--color-fontColor);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardDate {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardDate p {
+  font-size: 16px;
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardDate p.SDDDateAndMonth {
+  font-size: 40px;
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardTimeAndName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  border-left: 8px solid var(--color-borderColor);
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardTimeAndName .SDTNTime {
+  font-size: 70px;
+  position: relative;
+  right: 8px;
+  bottom: 2px;
+}
+
+.dashboard .leftDashboard .settingDashboard .settingDashboardTimeAndName .SDTNName {
+  position: relative;
+  right: 8px;
+  bottom: 2px;
+  padding: 0px 40px;
+  font-size: 14px;
+}
+
+.dashboard .leftDashboard .todoDashboard {
+  height: 75%;
+  margin-top: 30px;
+  display: flex;
+  position: relative;
+  background-color: var(--color-sbgColor);
+  border-radius: 34px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.dashboard .rightDashboard {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  border-radius: 34px;
+  width: 60%;
+}
+
+.dashboard .rightDashboard .noteDashboard {
+  display: flex;
+  background-size: var(--color-sbgColor);
+  height: 60%;
+  border-radius: 34px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  position: relative;
+  padding: 0;
+  width: 100%;
+}
+
+.dashboard .rightDashboard .walletDashboard {
+  width: 100%;
+  height: 34.5%;
+  background-color: var(--color-sbgColor);
+  border-radius: 34px;
+  color: var(--color-fontColor);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dashboard .rightDashboard .walletDashboard .walletConDashboard {
+  display: grid;
+  grid-template-columns: repeat(999999999, 1fr);
+  position: relative;
+  left: 30px;
+  height: 150px;
+  width: 600px;
+  border-radius: 0px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.dashboard .rightDashboard .walletDashboard .walletConDashboard .singleWalletCon {
+  height: 150px;
+  width: 150px;
+  border-radius: 35px 35px 0px 0px;
+  background-color: var(--color-primaryColor);
+  border: 8px solid var(--color-borderColor);
+  margin-right: 10px;
+}
+
+.dashboard .rightDashboard .walletDashboard .walletConDashboard .singleWalletCon .singleWalletName {
+  width: 100%;
+  border-radius: 29px 29px 0px 0px;
+  background-color: var(--color-secondaryColor);
+  border-bottom: 1px solid var(--color-borderColor);
+  font-size: 26px;
+  text-align: center;
+  padding: 8%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dashboard .rightDashboard .walletDashboard .walletConDashboard .singleWalletCon .singleWalletAmount {
+  font-size: 30px;
+  font-weight: bold;
+  height: 60%;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.dashboard .rightDashboard .walletDashboard .walletConDashboard::-webkit-scrollbar {
+  position: absolute;
+  background-color: var(--color-borderColor);
+  border-radius: 15px;
+}
+
+.dashboard .rightDashboard .walletDashboard .walletConDashboard::-webkit-scrollBar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.settingsBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.settingsBoard .settingsContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+  width: 50%;
+  height: 60%;
+}
+
+.settingsBoard .settingsContent .settingCon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settingsBoard .settingsContent .settingCon .settingLabel {
+  color: var(--color-fontColor);
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.settingsBoard .settingsContent .settingCon .switchThemeCon {
+  position: relative;
+}
+
+.settingsBoard .settingsContent .settingCon .switchThemeCon .moon {
+  width: 30px;
+  height: 30px;
+  fill: #FFEB00;
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  cursor: pointer;
+}
+
+.settingsBoard .settingsContent .settingCon .switchThemeCon .cloud {
+  width: 52px;
+  height: 40px;
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+  cursor: pointer;
+}
+
+.settingsBoard .settingsContent .settingCon .themeCheck {
+  width: 130px;
+  height: 60px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: 0;
+  padding: 0px 20px;
+  background-color: var(--color-secondaryColor);
+  color: var(--color-fontColor);
+  font-weight: bold;
+  cursor: pointer;
+  appearance: none;
+}
+
+.settingsBoard .settingsContent .settingCon .themeCheck:before {
+  display: block;
+  content: '';
+  width: 60px;
+  height: 45px;
+  border-radius: 24px;
+  background-color: black;
+  position: absolute;
+  bottom: 12px;
+  left: 63px;
+  transition: all 0.6s ease;
+}
+
+.settingsBoard .settingsContent .settingCon .themeCheck:checked:before {
+  display: block;
+  content: '';
+  width: 60px;
+  height: 45px;
+  border-radius: 24px;
+  background-color: white;
+  position: absolute;
+  bottom: 12px;
+  left: 7.5px;
+  transition: all 0.6s ease;
+}
+
+.settingsBoard .settingsContent .settingCon .nameSettingInputStorage {
+  position: relative;
+}
+
+.settingsBoard .settingsContent .settingCon .nameSettingInputStorage .nameSettingInput {
+  width: 260px;
+  height: 60px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: 0;
+  padding: 20px;
+  background-color: var(--color-secondaryColor);
+  color: var(--color-fontColor);
+  font-weight: bold;
+}
+
+.settingsBoard .settingsContent .settingCon .nameSettingInputStorage .nameSettingInput:focus {
+  outline: none;
+}
+
+.settingsBoard .settingsContent .settingCon .nameSettingInputStorage .setAccCircle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  right: -60px;
+  top: 5px;
+}
+
+.settingsBoard .settingsContent .settingCon .nameSettingInputStorage .setAccCircle .nameAccTick {
+  fill: white;
+  width: 30px;
+  height: 30px;
+}
+
+.settingsBoard .settingsContent .settingCon .currencySetting {
+  width: 260px;
+  height: 60px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: 0;
+  padding: 0px 20px;
+  background-color: var(--color-secondaryColor);
+  color: var(--color-fontColor);
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.settingsBoard .settingsContent .settingCon .currencySetting:focus {
+  outline: none;
+}
+
+.settingsBoard .settingsContent .settingCon .currencySetting .currencyOption {
+  font-size: 16px;
+}
+
+.todoBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 100%;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.noteBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 100%;
+  transition: all 0.3s ease;
+  position: absolute;
+  color: var(--color-fontColor);
+}
+
+.expenseBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 100%;
+  transition: all 0.3s ease;
+  position: absolute;
+  color: var(--color-fontColor);
+}
+
+.expenseBoard .expenseBoardInner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.expenseBoard .expenseBoardInner .walletLogBigCon {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 45%;
+  margin-right: 5%;
+  padding-left: 50px;
+  justify-content: flex-start;
+}
+
+.expenseBoard .expenseBoardInner .expenseTitles {
+  height: 10%;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.expenseBoard .expenseBoardInner .expenseTitles.wallet {
+  width: 50%;
+  text-align: start;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 90%;
+  margin-right: 10%;
+  justify-content: flex-start;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 450px;
+  padding-right: 30px;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon::-webkit-scrollbar {
+  position: absolute;
+  background-color: var(--color-borderColor);
+  border-radius: 15px;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon::-webkit-scrollBar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon {
+  width: 100%;
+  height: 50px;
+  background-color: var(--color-primaryColor);
+  border-radius: 25px;
+  margin-bottom: 20px;
+  color: var(--color-fontColor);
+  font-weight: bold;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 1fr 6fr 3fr 2fr;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .deleteLogCon {
+  border-radius: 25px 0 0 25px;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-secondaryColor);
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  z-index: 0;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogTitle {
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogWalletTitle {
+  background-color: var(--color-secondaryColor);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  width: 80px;
+  height: 100%;
+  padding-left: 5px;
+  padding-right: 10px;
+  margin-right: 10px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogIOE {
+  border-radius: 0 25px 25px 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogIOE.expense {
+  background-color: #930C0C;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogIOE.income {
+  background-color: #009D3C;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogDate {
+  background-color: var(--color-secondaryColor);
+  height: 100%;
+  font-size: 16px;
+  border-radius: 0px 25px 25px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.expenseBoard .expenseBoardInner .transLogBigCon .transLogMainCon .singleLogCon .singleLogDate p {
+  position: relative;
+  right: 5px;
+}
+
+.todoAddBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  position: absolute;
+}
+
+.todoAddBoard label {
+  color: var(--color-fontColor);
+  font-size: 25px;
+  text-decoration: underline;
+}
+
+.todoAddBoard .todoAddContent {
+  width: 60%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.todoAddBoard .todoAddContent .taskTitleAddCon {
+  display: flex;
+  flex-direction: column;
+}
+
+.todoAddBoard .todoAddContent .taskTitleAddInput {
+  height: 75px;
+  border-radius: 38px;
+  background-color: var(--color-primaryColor);
+  font-size: 40px;
+  font-weight: bold;
+  border: 0;
+  cursor: text;
+  color: var(--color-fontColor);
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.todoAddBoard .todoAddContent .taskTitleAddInput:focus {
+  outline: none;
+}
+
+.todoAddBoard .todoAddContent .taskDateInnerCon .taskDateAddInput {
+  background-color: var(--color-primaryColor);
+  height: 75px;
+  font-size: 40px;
+  border: 0;
+  color: var(--color-fontColor);
+  fill: var(--color-fontColor);
+  border-radius: 38px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.todoAddBoard .todoAddContent .taskDateInnerCon .taskDateAddInput:focus {
+  outline: none;
+}
+
+.todoAddBoard .todoAddContent .taskDateInnerCon .taskDateAddInput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.todoAddBoard .todoAddContent .taskAddConfirmBtn {
+  height: 75px;
+  width: 75%;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 38px;
+  background-color: var(--color-borderColor);
+  font-size: 40px;
+  font-weight: bold;
+  border: 0;
+  cursor: pointer;
+  color: var(--color-fontColor);
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.expenseAddBoard {
+  width: 85vw;
+  height: 87vh;
+  background-color: var(--color-sbgColor);
+  border-radius: 75px;
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  position: absolute;
+  color: var(--color-fontColor);
+}
+
+.expenseAddBoard .expenseAddTransactionCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  height: 90%;
+  border-right: 8px solid var(--color-borderColor);
+  position: relative;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .EATCTitle {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon label {
+  text-decoration: underline;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATC {
+  border-radius: 38px;
+  border: 0;
+  background-color: var(--color-primaryColor);
+  width: 350px;
+  height: 55px;
+  padding: 10px;
+  font-size: 30px;
+  padding: 20px;
+  color: var(--color-fontColor);
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATC.num::-webkit-outer-spin-button, .expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATC.num::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATC:focus {
+  outline: none;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATC.trans {
+  width: 100%;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATCSelect {
+  border-radius: 38px;
+  border: 0;
+  background-color: var(--color-primaryColor);
+  width: 350px;
+  height: 55px;
+  padding: 10px;
+  font-size: 20px;
+  color: var(--color-fontColor);
+  font-weight: bold;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATCSelect.wallet {
+  width: 220px;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATCSelect:focus {
+  outline: none;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .singleInputEATCCon .EATCSelect option {
+  border: 0;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .bigSingleInputEATCCon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 75%;
+}
+
+.expenseAddBoard .expenseAddTransactionCon .bigSingleInputEATCCon .singleInputEATCCon .EATC {
+  width: 220px;
+}
+
+.expenseAddBoard .expenseAddWalletCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 90%;
+  border-left: 8px solid var(--color-borderColor);
+}
+
+.expenseAddBoard .expenseAddWalletCon .EAWCTitle {
+  position: relative;
+  bottom: 27px;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+.expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon .singleInputEAWCCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon .singleInputEAWCCon label {
+  font-size: 20px;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon .singleInputEAWCCon .EAWC {
+  border-radius: 38px;
+  border: 0;
+  background-color: var(--color-primaryColor);
+  width: 250px;
+  height: 55px;
+  padding: 10px;
+  font-size: 30px;
+  margin-bottom: 50px;
+  padding: 20px;
+  color: var(--color-fontColor);
+}
+
+.expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon .singleInputEAWCCon .EAWC.num::-webkit-outer-spin-button, .expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon .singleInputEAWCCon .EAWC.num::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.expenseAddBoard .expenseAddWalletCon .bigSingleInputEAWCCon .singleInputEAWCCon .EAWC:focus {
+  outline: none;
+}
+
+.expenseAddBoard .EAButton {
+  width: 65%;
+  background-color: var(--color-borderColor);
+  height: 60px;
+  border-radius: 38px;
+  border: 0;
+  font-size: 40px;
+  color: var(--color-fontColor);
+  font-family: 'Times', serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.expenseAddBoard .EAButton.EAWButton {
+  position: relative;
+  top: 8px;
+  width: 75%;
+}
+/*# sourceMappingURL=styles.css.map */

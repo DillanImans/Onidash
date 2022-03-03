@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onidash || `Dynamic Name`</title>
+  <meta name="description" content="The ONI Dashboard You Need">
+  <link rel="stylesheet" href="/cssCompiled/styles.css">
+</head>
+
+<body>
+  <!-- Pacman Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="pacman">
+      <div class="pacmanMouth"></div>
+    </div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- Context Menu -->
+  <div class="contextMenuNote" id="contextMenuNote">
+    <div class="deleteNote" id="deleteNote">Delete Note (forever)</div>
+  </div>
+
+  <!-- Delete Note -->
+    <!-- Context Menu -->
+    <div class="contextMenuNote" id="contextMenuLog">
+      <div class="deleteNote" id="deleteLog">Delete Wallet (forever)</div>
+    </div>
+  
+
+  <!-- Show Money -->
+  <div class="hoverThingy" id="showMoneyLog">
+    <div class="showMoney" id="showMoney"></div>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Edges -->
+    <div class="edges">
+      <div class="edge1 edge"></div>
+      <div class="edge2 edge"></div>
+      <div class="edge3 edge"></div>
+      <div class="edge4 edge"></div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notif" id="notif">
+      <p id="notifText"></p>
+    </div>
+
+    <!-- Introboard -->
+     <div class="mainBoard" id="mainBoard">
+      <div class="introContentArea" id="introContentArea">
+
+        <div class="introIntro" id="introIntro">
+          Welcome to Onidash!
+        </div>
+
+        <div class="introName" id="introName">
+          <label class="nameLabel">What should I call you?</label>
+          <div class="nameIntroInputStorage">
+            <input type="text" class="nameIntroInput" id="nameIntroInput" autocomplete="off" placeholder="Your Name..." minlength="1" maxlength="10">
+            <div class="nameAccCircle" id="nameAccCircle">
+              <svg class="nameAccTick" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m9.707 19.121c-.187.188-.442.293-.707.293s-.52-.105-.707-.293l-5.646-5.647c-.586-.586-.586-1.536 0-2.121l.707-.707c.586-.586 1.535-.586 2.121 0l3.525 3.525 9.525-9.525c.586-.586 1.536-.586 2.121 0l.707.707c.586.586.586 1.536 0 2.121z"/></g></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="introHey" id="introHey">
+          <div class="introHeyNameCon"><p>Hey &nbsp;</p><p class="italic" id="nameIntroHey"></p></div> <span>I hope you enjoy your stay!</span>
+        </div>
+        <div class="welcomeBack" id="welcomeBack">Welcome Back<span class="italic" id="welcomeBackName"></span></div>
+      </div>
+    </div>
+
+
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+      
+      <!-- Left -->
+      <div class="leftDashboard">
+        <div class="settingDashboard">
+          <svg class="settingDashboardGear" id="settingDashboardGear" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="25px" height="25.001px" viewBox="0 0 25 25.001" style="enable-background:new 0 0 25 25.001;" xml:space="preserve">
+<g>
+	<path d="M24.38,10.175l-2.231-0.268c-0.228-0.851-0.562-1.655-0.992-2.401l1.387-1.763c0.212-0.271,0.188-0.69-0.057-0.934
+		l-2.299-2.3c-0.242-0.243-0.662-0.269-0.934-0.057l-1.766,1.389c-0.743-0.43-1.547-0.764-2.396-0.99L14.825,0.62
+		C14.784,0.279,14.469,0,14.125,0h-3.252c-0.344,0-0.659,0.279-0.699,0.62L9.906,2.851c-0.85,0.227-1.655,0.562-2.398,0.991
+		L5.743,2.455c-0.27-0.212-0.69-0.187-0.933,0.056L2.51,4.812C2.268,5.054,2.243,5.474,2.456,5.746L3.842,7.51
+		c-0.43,0.744-0.764,1.549-0.991,2.4l-2.23,0.267C0.28,10.217,0,10.532,0,10.877v3.252c0,0.344,0.279,0.657,0.621,0.699l2.231,0.268
+		c0.228,0.848,0.561,1.652,0.991,2.396l-1.386,1.766c-0.211,0.271-0.187,0.69,0.057,0.934l2.296,2.301
+		c0.243,0.242,0.663,0.269,0.933,0.057l1.766-1.39c0.744,0.43,1.548,0.765,2.398,0.991l0.268,2.23
+		c0.041,0.342,0.355,0.62,0.699,0.62h3.252c0.345,0,0.659-0.278,0.699-0.62l0.268-2.23c0.851-0.228,1.655-0.562,2.398-0.991
+		l1.766,1.387c0.271,0.212,0.69,0.187,0.933-0.056l2.299-2.301c0.244-0.242,0.269-0.662,0.056-0.935l-1.388-1.764
+		c0.431-0.744,0.764-1.548,0.992-2.397l2.23-0.268C24.721,14.785,25,14.473,25,14.127v-3.252
+		C25.001,10.529,24.723,10.216,24.38,10.175z M12.501,18.75c-3.452,0-6.25-2.798-6.25-6.25s2.798-6.25,6.25-6.25
+		s6.25,2.798,6.25,6.25S15.954,18.75,12.501,18.75z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g></svg>
+
+          <div class="settingDashboardDate" id="settingDashboardDate">
+
+          </div>
+
+          <div class="settingDashboardTimeAndName">
+            <h1 class="SDTNTime" id="SDTNTime"></h1>
+            <p class="SDTNName" id="SDTNName"></p>
+          </div>
+        </div>
+
+
+        <div class="todoDashboard">
+          <svg class="plus db" id="plusTodo" height="448pt" viewBox="0 0 448 448" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"/></svg>
+          <svg class="fs" id="fsTodo" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+<g>
+	<g id="fullscreen">
+		<path d="M51,229.5H0V357h127.5v-51H51V229.5z M0,127.5h51V51h76.5V0H0V127.5z M306,306h-76.5v51H357V229.5h-51V306z M229.5,0v51
+			H306v76.5h51V0H229.5z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+          <div class="todoDashboardTasksContainer">
+            <div class="todoContent db" id="todoContentDash">
+            
+              </div>
+          </div>
+        </div>
+
+
+      </div>
+      
+      <!-- Right -->
+      <div class="rightDashboard">
+
+        <div class="noteDashboard">
+          <svg class="plus db" id="plusNote" height="448pt" viewBox="0 0 448 448" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"/></svg>
+          <svg class="fs" id="fsNote" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+<g>
+	<g id="fullscreen">
+		<path d="M51,229.5H0V357h127.5v-51H51V229.5z M0,127.5h51V51h76.5V0H0V127.5z M306,306h-76.5v51H357V229.5h-51V306z M229.5,0v51
+			H306v76.5h51V0H229.5z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+<svg class="save db" onClick="saveNoteDash()" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 492.308 492.308" style="enable-background:new 0 0 492.308 492.308;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M398.317,0h-21.836H115.827H0v492.308h87.442h317.423h87.442V82.067L398.317,0z M135.519,19.692h221.269V153.99H135.519
+			V19.692z M385.173,472.615H107.135V259.385h278.038V472.615z M472.615,472.615h-67.75V239.692H87.442v232.923h-67.75V19.692
+			h96.135v153.99h260.654V19.692h14.452l81.683,71.317V472.615z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="143.911" y="299.49" width="204.495" height="19.692"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="304.581" y="57.482" width="19.692" height="70.036"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="143.911" y="356.431" width="204.495" height="19.692"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="143.911" y="413.292" width="204.495" height="19.692"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+
+          <ul class="noteListCon db" id="noteListCon">
+            <!-- <li class="noteList focused db"></li>
+            <li class="noteList db"></li>
+            <li class="noteList db"></li>
+            <li class="noteList db"></li> -->
+          </ul>
+          <div class="noteMainCon db" id="noteMainCon">
+            <div contenteditable="true" class="noteMainHeader db" id="noteMainHeaderDash"></div>
+            <div class="noteMainBody db" id="noteMainBodyDash"></div>
+          </div>
+        </div>
+
+        <div class="walletDashboard">
+          <svg class="plus wallet" id="plusLog" height="448pt" viewBox="0 0 448 448" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"/></svg>
+          <svg class="fs wallet" id="fsLog" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+       <g>
+         <g id="fullscreen">
+           <path d="M51,229.5H0V357h127.5v-51H51V229.5z M0,127.5h51V51h76.5V0H0V127.5z M306,306h-76.5v51H357V229.5h-51V306z M229.5,0v51
+             H306v76.5h51V0H229.5z"/>
+         </g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       <g>
+       </g>
+       </svg>
+
+          <div class="walletConDashboard" id="walletConDashboard">
+            <div class="singleWalletCon total db">
+              <h1 class="singleWalletName total db">Total</h1>
+              <p class="singleWalletAmount total db" id="totalWalletAmountDb">$0</p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- Settings -->
+    <div class="settingsBoard" id="settingsBoard">
+      <div class="backCircleThing" id="backCircleSetting">
+        <svg class="backArrow" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 492.004 492.004" style="enable-background:new 0 0 492.004 492.004;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136
+			c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002
+			v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864
+			c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872
+			l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+      </div>
+
+      <div class="settingsContent">
+
+        <div class="settingCon">
+          <p class="settingLabel">Theme</p>
+          <div class="switchThemeCon">
+            <input type="checkbox" class="themeCheck" id="themeCheck">
+            <svg id="moon" class="moon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 312.812 312.812" style="enable-background:new 0 0 312.812 312.812;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M305.2,178.159c-3.2-0.8-6.4,0-9.2,2c-10.4,8.8-22.4,16-35.6,20.8c-12.4,4.8-26,7.2-40.4,7.2c-32.4,0-62-13.2-83.2-34.4
+                  c-21.2-21.2-34.4-50.8-34.4-83.2c0-13.6,2.4-26.8,6.4-38.8c4.4-12.8,10.8-24.4,19.2-34.4c3.6-4.4,2.8-10.8-1.6-14.4
+                  c-2.8-2-6-2.8-9.2-2c-34,9.2-63.6,29.6-84.8,56.8c-20.4,26.8-32.4,60-32.4,96c0,43.6,17.6,83.2,46.4,112s68,46.4,112,46.4
+                  c36.8,0,70.8-12.8,98-34c27.6-21.6,47.6-52.4,56-87.6C314,184.959,310.8,179.359,305.2,178.159z"/>
+              </g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            </svg>
+            <svg id="cloud" class="cloud" height="463pt" viewBox="0 -87 463.83425 463" width="463pt" xmlns="http://www.w3.org/2000/svg"><path d="m375.835938 112.957031c-5.851563 0-11.691407.582031-17.425782 1.742188-4.324218-21.582031-18.304687-39.992188-37.933594-49.957031-19.625-9.964844-42.738281-10.382813-62.714843-1.136719-18.078125-49.796875-73.101563-75.507813-122.898438-57.429688s-75.507812 73.105469-57.429687 122.898438c-43.621094 1.378906-78.078125 37.484375-77.4257815 81.121093.6562495 43.640626 36.1835935 78.691407 79.8281255 78.761719h296c48.597656 0 88-39.398437 88-88 0-48.601562-39.402344-88-88-88zm0 0" fill="#a3d4f7"/></svg>
+          </div>
+        </div>
+
+        <div class="settingCon">
+          <p class="settingLabel">Name</p>
+          <div class="nameSettingInputStorage">
+            <input type="text" class="nameSettingInput" id="nameSettingInput" autocomplete="off" minlength="1" maxlength="10">
+            <div class="setAccCircle" id="setAccCircle">
+              <svg class="nameAccTick" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m9.707 19.121c-.187.188-.442.293-.707.293s-.52-.105-.707-.293l-5.646-5.647c-.586-.586-.586-1.536 0-2.121l.707-.707c.586-.586 1.535-.586 2.121 0l3.525 3.525 9.525-9.525c.586-.586 1.536-.586 2.121 0l.707.707c.586.586.586 1.536 0 2.121z"/></g></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="settingCon">
+          <p class="settingLabel">Currency</p>
+          <select id="currencySetting" class="currencySetting">
+            <option value="USD" class="currencyOption" id="currencyOption">$USD</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- To-do List -->
+    <div class="todoBoard" id="todoBoard">
+      <svg class="plus" id="plusTodoBoard" height="448pt" viewBox="0 0 448 448" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"/></svg>
+      <svg class="exitFs" id="exitFsTodo" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+<g>
+	<g id="fullscreen-exit">
+		<path d="M0,280.5h76.5V357h51V229.5H0V280.5z M76.5,76.5H0v51h127.5V0h-51V76.5z M229.5,357h51v-76.5H357v-51H229.5V357z
+			 M280.5,76.5V0h-51v127.5H357v-51H280.5z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+      <div class="todoContent" id="todoContentBoard">
+
+    </div>
+  </div>
+
+
+    <!-- Note App -->
+  <div class="noteBoard" id="noteBoard">
+    <svg class="plus" id="plusNoteBoard" height="448pt" viewBox="0 0 448 448" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"/></svg>
+    <svg class="exitFs" id="exitFsNote" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+ width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+<g>
+<g id="fullscreen-exit">
+  <path d="M0,280.5h76.5V357h51V229.5H0V280.5z M76.5,76.5H0v51h127.5V0h-51V76.5z M229.5,357h51v-76.5H357v-51H229.5V357z
+     M280.5,76.5V0h-51v127.5H357v-51H280.5z"/>
+</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+<svg class="save" onClick="saveNoteBoard()" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 492.308 492.308" style="enable-background:new 0 0 492.308 492.308;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M398.317,0h-21.836H115.827H0v492.308h87.442h317.423h87.442V82.067L398.317,0z M135.519,19.692h221.269V153.99H135.519
+			V19.692z M385.173,472.615H107.135V259.385h278.038V472.615z M472.615,472.615h-67.75V239.692H87.442v232.923h-67.75V19.692
+			h96.135v153.99h260.654V19.692h14.452l81.683,71.317V472.615z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="143.911" y="299.49" width="204.495" height="19.692"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="304.581" y="57.482" width="19.692" height="70.036"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="143.911" y="356.431" width="204.495" height="19.692"/>
+	</g>
+</g>
+<g>
+	<g>
+		<rect x="143.911" y="413.292" width="204.495" height="19.692"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+    <ul class="noteListCon" id="noteListConBoard">
+      <!-- <li class="noteList focused"></li>
+      <li class="noteList"></li>
+      <li class="noteList"></li>
+      <li class="noteList"></li> -->
+    </ul>
+    <div class="noteMainCon" id="noteMainCon">
+      <div contenteditable="true" placeholder="Title" class="noteMainHeader" id="noteMainHeaderBoard"></div>
+      <div contenteditable="true"  class="noteMainBody" id="noteMainBodyBoard"></div>
+    </div>
+  </div>
+
+
+    <!-- Expense Tracker -->
+    <div class="expenseBoard" id="expenseBoard">
+      <svg class="plus" id="plusLogBoard" height="448pt" viewBox="0 0 448 448" width="448pt" xmlns="http://www.w3.org/2000/svg"><path d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0"/></svg>
+      <svg class="exitFs" id="exitFsLog" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+<g>
+  <g id="fullscreen-exit">
+    <path d="M0,280.5h76.5V357h51V229.5H0V280.5z M76.5,76.5H0v51h127.5V0h-51V76.5z M229.5,357h51v-76.5H357v-51H229.5V357z
+       M280.5,76.5V0h-51v127.5H357v-51H280.5z"/>
+  </g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+<div class="expenseBoardInner">
+  <div class="walletLogBigCon">
+    <h1 class="expenseTitles wallet">Wallets</h1>
+    <div class="walletCon" id="walletConBoard">
+        <div class="singleWalletCon total">
+          <h1 class="singleWalletName total">Total</h1>
+          <p class="singleWalletAmount total" id="totalWalletAmountBoard">$0</p>
+        </div>
+    </div>
+  </div>
+
+    
+    <div class="transLogBigCon">
+      <h1 class="expenseTitles">Transactions</h1>
+      <div class="transLogMainCon" id="transLogMainConBoard">
+
+      </div>
+    </div>
+</div>
+   
+    </div>
+
+
+    <!-- Add Containers -->
+    <!-- Todo -->
+  <div class="todoAddBoard" id="todoAddBoard">
+      <div class="backCircleThing" id="backCircleTodoAdd">
+        <svg class="backArrow" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 492.004 492.004" style="enable-background:new 0 0 492.004 492.004;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136
+			c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002
+			v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864
+			c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872
+			l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+      </div>
+
+      <div class="todoAddContent">
+        <div class="taskTitleAddCon">
+          <label>Task</label>
+          <input autocomplete="off" type="text" class="taskTitleAddInput" id="taskTitleAddInput">
+        </div>
+        <div class="taskDateAddCon">
+          <label>Date</label>
+          <div class="taskDateInnerCon">
+            <input autocomplete="off" type="date" class="taskDateAddInput" id="taskDateAddInput" min="2021-01-01" max="2100-12-31">
+          </div>
+        </div>
+        <button class="taskAddConfirmBtn" id="taskAddConfirmBtn"><p>Confirm</p></button>
+      </div>
+  </div>
+
+
+    <!-- Expense -->
+  <div class="expenseAddBoard" id="expenseAddBoard">
+    <div class="backCircleThing" id="backCircleExpenseAdd">
+      <svg class="backArrow" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+ viewBox="0 0 492.004 492.004" style="enable-background:new 0 0 492.004 492.004;" xml:space="preserve">
+<g>
+<g>
+  <path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136
+    c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002
+    v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864
+    c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872
+    l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"/>
+</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+    </div>
+  
+    <div class="expenseAddTransactionCon" id="expenseAddTransactionForm">
+      <h1 class="EATCTitle">Add Transaction</h1>
+      <div class="singleInputEATCCon">
+        <label>Transaction</label>
+        <input autocomplete="off" type="text" class="EATC trans" id="EATCTitle">
+      </div>
+      <div class="bigSingleInputEATCCon">
+        <div class="singleInputEATCCon">
+          <label>Amount (in $)</label>
+          <input autocomplete="off" type="number" onkeydown="return event.keyCode !== 69" class="EATC num" id="EATCAmount">
+        </div>
+        <div class="singleInputEATCCon">
+          <label>Wallet</label>
+          <select class="EATCSelect wallet" id="EATCWallet">
+            <option value="Total">Total</option>
+          </select>
+        </div>
+      </div>
+      <div class="singleInputEATCCon">
+        <label>Income/Expense</label>
+        <select class="EATCSelect" id="EATCIOE">
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+      </div>
+      <button class="EAButton" id="EATCButton">Confirm</button>
+    </div>
+    <div class="expenseAddWalletCon">
+      <h1 class="EAWCTitle">Add Wallet</h1>
+      <div class="bigSingleInputEAWCCon">
+        <div class="singleInputEAWCCon">
+          <label>Wallet Name</label>
+          <input autocomplete="off" type="text" class="EAWC" id="EAWCName">
+        </div>
+        <div class="singleInputEAWCCon">
+          <label>Starting Amount (in $)</label>
+          <input autocomplete="off" type="number" onkeydown="return event.keyCode !== 69" class="EAWC num" id="EAWCAmount">
+        </div>
+      </div>
+      <button class="EAButton EAWButton" id="EAWCButton">Confirm</button>
+    </div>
+  </div> 
+
+
+
+  </main>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
