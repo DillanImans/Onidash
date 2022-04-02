@@ -12,7 +12,7 @@ A three-in-one desktop dashboard that consists of:
 * Expand/Collapse mode for each feature
 * Uses LocalStorage
 ----
-### Project Weaknessess
+### Project Weaknesses
 * Probably a lot of undetected bugs
 * No reusability
 * Poorly documented code
