@@ -1,6 +1,8 @@
 # Onidash
 > Preview Link: https://onidash.netlify.app/
 
+![Preview](https://github.com/DillanImans/Onidash/blob/master/preview.png)
+
 ### Project Features
 A three-in-one desktop dashboard that consists of:
 * Todo list
