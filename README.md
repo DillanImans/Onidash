@@ -3,7 +3,7 @@
 
 ![Preview](https://github.com/DillanImans/Onidash/blob/master/preview.png)
 
-### Project Features
+### Project Desc
 A three-in-one desktop dashboard that consists of:
 * Todo list
 * Notes
